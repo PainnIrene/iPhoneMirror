@@ -613,7 +613,7 @@
     <system:String x:Key="Save">Save</system:String>
     <system:String x:Key="VideoPipelineAppliedFormat">Video pipeline applied: {0}</system:String>
     <system:String x:Key="WindowTitleConnectivity">iPhoneMirror - iPhone/iPad Mirroring</system:String>
-    <system:String x:Key="AppSubtitleConnectivity">Low-latency USB and wireless AirPlay mirroring for Windows</system:String>
+    <system:String x:Key="AppSubtitleConnectivity">Low-latency iPhone/iPad screen capture over USB</system:String>
     <system:String x:Key="WirelessReceiverTitle">Wireless AirPlay</system:String>
     <system:String x:Key="WirelessReceiverNameLabel">Receiver name</system:String>
     <system:String x:Key="WirelessBackendLabel">Receiver implementation</system:String>

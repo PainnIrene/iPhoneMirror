@@ -660,12 +660,10 @@ internal sealed partial class MainViewModel : INotifyPropertyChanged
         ? Visibility.Collapsed : Visibility.Visible;
     public Visibility VideoSettingsVisibility => SelectedDevice is not null &&
         !IsMediaCastSelected ? Visibility.Visible : Visibility.Collapsed;
-    public Visibility WirelessActualVideoSettingsVisibility => IsWirelessSelected && !IsMediaCastSelected
-        ? Visibility.Visible : Visibility.Collapsed;
-    public Visibility WirelessTopSettingsVisibility => IsWirelessSelected && !IsMediaCastSelected
-        ? Visibility.Visible : Visibility.Collapsed;
-    public Visibility WirelessBottomSettingsVisibility => IsWirelessSelected || IsMediaCastSelected
-        ? Visibility.Collapsed : Visibility.Visible;
+    // Ban USB-only: an moi panel cai dat wireless/AirPlay khoi UI.
+    public Visibility WirelessActualVideoSettingsVisibility => Visibility.Collapsed;
+    public Visibility WirelessTopSettingsVisibility => Visibility.Collapsed;
+    public Visibility WirelessBottomSettingsVisibility => Visibility.Collapsed;
     public Visibility UsbProjectionSettingsVisibility => SelectedDevice is not null &&
         !IsWirelessSelected && !IsMediaCastSelected && !IsBusy && !HasCaptureSession
         ? Visibility.Visible : Visibility.Collapsed;
