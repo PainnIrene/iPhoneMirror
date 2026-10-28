@@ -172,13 +172,13 @@ internal static class LocalizationService
         try
         {
             settingsPath ??= SettingsPath;
-            if (!File.Exists(settingsPath)) return SystemLanguage;
+            if (!File.Exists(settingsPath)) return English; // USB-only fork: mac dinh English
             return new UpdateSettingsStore(settingsPath).Load().Language;
         }
         catch (Exception error)
         {
             DiagnosticLogger.Exception("localization", "language_load_failed", error);
-            return SystemLanguage;
+            return English;
         }
     }
 
