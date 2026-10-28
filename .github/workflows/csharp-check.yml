@@ -1,0 +1,34 @@
+name: C# quick check
+
+# Vong lap nhanh khi refactor: chi bien dich phan C# (App) tren Windows,
+# bo qua native/CMake, test va dong goi. Chay ~vai phut thay vi 30-40 phut.
+# Build day du van do windows-build.yml dam nhiem khi push vao main / mo PR.
+
+on:
+  push:
+    branches: [main, "feat/**", "refactor/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: csharp-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  managed-build:
+    name: managed-build
+    runs-on: windows-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up .NET 10 SDK
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Build managed App (C# only, no native/tests/installer)
+        shell: pwsh
+        run: dotnet build src/App/iPhoneMirror.App.csproj -c Debug --nologo -p:IncludeBundledFfmpeg=false
