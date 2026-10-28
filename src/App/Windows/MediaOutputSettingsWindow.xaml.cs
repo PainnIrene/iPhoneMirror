@@ -48,8 +48,9 @@ public partial class MediaOutputSettingsWindow : IPhoneMirror.UI.Controls.Rounde
     private async void OnLoaded(object sender, RoutedEventArgs e)
     {
         ApplyPreviewOutputDefaults(force: true);
-        RecordFpsBox.Text = StreamFpsBox.Text = "30";
-        RecordBitrateBox.Text = StreamBitrateBox.Text = "6000";
+        // Mac dinh quay game: 60fps + 12 Mbps cho net o 1080p60. Phat truc tiep giu thap hon.
+        RecordFpsBox.Text = "60"; StreamFpsBox.Text = "30";
+        RecordBitrateBox.Text = "12000"; StreamBitrateBox.Text = "6000";
         VirtualCameraFpsBox.SelectedIndex = 0;
         if (_previewOnly)
         {
