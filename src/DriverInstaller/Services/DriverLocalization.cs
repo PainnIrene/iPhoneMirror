@@ -20,9 +20,9 @@ internal static class DriverLocalization
 
     internal static void Initialize(IReadOnlyList<string> arguments)
     {
-        var requested = ReadArgument(arguments) ?? LoadConfiguredLanguage();
-        Language = ResolveLanguage(requested);
-        Culture = CultureInfo.GetCultureInfo(Language);
+        // Ban English-only: luon dung en-US (bo qua config/OS).
+        Language = English;
+        Culture = CultureInfo.GetCultureInfo(English);
         CultureInfo.CurrentCulture = Culture;
         CultureInfo.CurrentUICulture = Culture;
         CultureInfo.DefaultThreadCurrentCulture = Culture;
