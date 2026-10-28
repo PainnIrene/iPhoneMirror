@@ -120,7 +120,8 @@ function Get-LocalizationDictionaries([string]$ProjectPath, [string]$ServicePath
     if ($declared.Count -eq 0) {
         throw "No supported languages found in '$ServicePath'."
     }
-    foreach ($culture in @('en-US') + $declared) {
+    # Ban English-only: chi yeu cau en-US (bo kiem doi chieu da ngon ngu).
+    foreach ($culture in @('en-US')) {
         if (-not $dictionaries.Contains($culture)) {
             throw "Missing localization dictionary Strings.$culture.xaml in '$ProjectPath'."
         }
