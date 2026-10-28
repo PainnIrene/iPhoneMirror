@@ -190,9 +190,15 @@ public partial class App : Application
         }
     }
 
+    // Ban USB-only: tat hoan toan auto-update. Khong bao gio lien he mang,
+    // khong tai code tu GitHub tac gia (tranh rui ro chuoi cung ung).
+    // static readonly (khong phai const) de code ben duoi van "dat toi duoc".
+    private static readonly bool UpdatesEnabled = false;
+
     internal async Task<ReleaseInfo?> CheckForUpdatesAsync(bool manual,
         CancellationToken cancellationToken = default)
     {
+        if (!UpdatesEnabled) return null;
         var settings = UpdateSettings.Clone();
         if (manual && !settings.NotifyStableReleases &&
             !settings.NotifyPrereleaseReleases)
