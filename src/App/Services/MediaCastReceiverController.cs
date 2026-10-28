@@ -21,8 +21,16 @@ internal sealed class MediaCastReceiverController(
     internal bool IsAvailable => SupportsCurrentWirelessBackend &&
         _receiver.IsBackendAvailable(WirelessReceiverBackend.Original);
 
+    // Ban USB-only: khong khoi dong receiver media casting (khong day).
+    private static readonly bool MediaCastEnabled = false;
+
     internal async Task<bool> EnsureStartedAsync()
     {
+        if (!MediaCastEnabled)
+        {
+            if (Running || Ready) await StopAsync();
+            return Running = Ready = false;
+        }
         if (!SupportsCurrentWirelessBackend)
         {
             if (Running || Ready) await StopAsync();

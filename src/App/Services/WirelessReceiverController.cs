@@ -38,6 +38,11 @@ internal sealed class WirelessReceiverController(
     internal bool Ready { get; private set; }
     internal string? StartError { get; private set; }
     internal bool IsAvailable => _receiver.IsBackendAvailable(Backend);
+
+    // Ban USB-only: luon tat receiver khong day de khong mo cong mang nao.
+    // Dung static readonly (khong phai const) de nhanh bi tat ben duoi van
+    // "dat toi duoc" (tranh canh bao CS0162).
+    private static readonly bool WirelessReceiverEnabled = false;
     internal bool IsBackendAvailable(WirelessReceiverBackend backend) =>
         _receiver.IsBackendAvailable(backend);
 
@@ -45,6 +50,13 @@ internal sealed class WirelessReceiverController(
         string? receiverName = null, WirelessDisplayProfile? displayProfile = null,
         WirelessReceiverBackend? backend = null)
     {
+        // Ban USB-only: khong bao gio khoi dong receiver khong day (khong mo cong).
+        if (!WirelessReceiverEnabled)
+        {
+            Running = Ready = false;
+            StartError = null;
+            return new(false, null, false);
+        }
         await _lifecycleGate.WaitAsync();
         try
         {
