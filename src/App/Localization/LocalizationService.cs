@@ -77,13 +77,9 @@ internal static class LocalizationService
 
     private static void ApplyLanguage(string language, bool persist, bool notify)
     {
-        if (language is not (SystemLanguage or SimplifiedChinese or
-            TraditionalChineseHongKong or TraditionalChineseTaiwan or English or Japanese))
-            language = SystemLanguage;
-
-        var cultureName = language == SystemLanguage
-            ? ResolveSystemCulture()
-            : language;
+        // English-only build: bo qua moi ngon ngu duoc yeu cau, luon dung English.
+        language = English;
+        var cultureName = English;
         var culture = CultureInfo.GetCultureInfo(cultureName);
 
         // Record the requested language before loading its resource dictionary so a

@@ -7,7 +7,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemesDictionary Theme="Dark"/>
                 <ui:ControlsDictionary/>
-                <ResourceDictionary Source="Localization/Strings.zh-CN.xaml"/>
+                <ResourceDictionary Source="Localization/Strings.en-US.xaml"/>
                 <ResourceDictionary Source="Themes/DarkTheme.xaml"/>
                 <ResourceDictionary Source="Animations/ModernAnimations.xaml"/>
                 <ResourceDictionary Source="Themes/DesignTokens.xaml"/>

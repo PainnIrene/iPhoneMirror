@@ -13,15 +13,7 @@ public partial class FirstRunSetupWindow
 {
     private void Preferences()
     {
-        var row = CardRow();
-        foreach (var (value, label) in new[] { ("system", "LanguageSystem"), ("zh-CN", "LanguageChinese"),
-            ("zh-TW", "LanguageTraditionalChineseTaiwan"), ("zh-HK", "LanguageTraditionalChineseHongKong"), ("en-US", "LanguageEnglish"), ("ja-JP", "LanguageJapanese") })
-        {
-            var card = ChoiceCard("language", label, null, LocalizationService.SelectedLanguage == value);
-            card.Checked += (_, _) => _main.SelectedLanguage = value;
-            row.Children.Add(card);
-        }
-        Body.Children.Add(row);
+        // English-only build: khong con menu chon ngon ngu o first-run.
     }
 
     private void ApplicationModeChoices()
