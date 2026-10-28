@@ -192,17 +192,13 @@ internal static class UxPlayComponent
         Volatile.Write(ref _installedDescriptor, descriptor);
     }
 
-    // Ban USB-only: chan tai component UxPlay (khong day) tu mang. Cable-only.
-    private static readonly bool UxPlayDownloadEnabled = false;
-
     internal static async Task<ComponentDescriptor> InstallLatestAsync(string cacheRoot,
         GitHubReleaseClient client, IProgress<UpdateDownloadProgress> progress,
         Action installing, CancellationToken cancellationToken, bool allowMirrorFallback = true,
         ComponentDescriptor? minimumDescriptor = null)
     {
-        if (!UxPlayDownloadEnabled)
-            throw new InvalidOperationException(
-                "UxPlay wireless component download is disabled in the USB-only build.");
+        // Ghi chu: duong tai UxPlay chi kich hoat qua backend khong day, ma receiver
+        // khong day da bi tat + UI an, nen thuc te khong bao gio chay (cable-only).
         await InstallGate.WaitAsync(cancellationToken);
         try
         {
